@@ -188,6 +188,24 @@ class Evaluator:
             dict['total FP']: total number of False Negative detections;
         """
         results = self.GetPascalVOCMetrics(boundingBoxes, IOUThreshold, method)
+        save_dir='/content/Object-Detection-Metrics/results/pr_curve.png'
+        fig, ax = plt.subplots(1, 1, figsize=(9, 6), tight_layout=True)
+        for result in results:
+            classId = result['class']
+            precision = result['precision']
+            recall = result['recall']
+            average_precision = result['AP']
+            ap_str = "{0:.2f}%".format(average_precision * 100)
+            leb = str(classId)  + ap_str
+            
+            ax.plot(recall, precision, linewidth=1, label=leb)  # plot(recall, precision)
+            #ax.plot(recall, py.mean(1), linewidth=3, color='blue', label='all classes %.3f mAP@0.5' % ap[:, 0].mean())
+            ax.set_xlabel('Recall')
+            ax.set_ylabel('Precision')
+            ax.set_xlim(0, 1)
+            ax.set_ylim(0.8, 1.01)
+            plt.legend(bbox_to_anchor=(1.04, 1), loc="upper left")
+        fig.savefig(Path(save_dir), dpi=100)
         result = None
         # Each resut represents a class
         for result in results:
