@@ -406,6 +406,11 @@ for metricsPerClass in detections:
         rec = ['%.2f' % r for r in recall]
         ap_str = "{0:.2f}%".format(ap * 100)
         # ap_str = "{0:.4f}%".format(ap * 100)
+        print("Total positives:", totalPositives)
+        print("True positive:", total_TP)
+        print("False positive:", total_FP)
+        total_FN = totalPositives-total_TP
+        print("False negative:", total_FN)
         print('AP: %s (%s)' % (ap_str, cl))
         f.write('\n\nClass: %s' % cl)
         f.write('\nAP: %s' % ap_str)
