@@ -202,11 +202,11 @@ class Evaluator:
             #ax.plot(recall, py.mean(1), linewidth=3, color='blue', label='all classes %.3f mAP@0.5' % ap[:, 0].mean())
             ax.set_xlabel('Recall')
             ax.set_ylabel('Precision')
-            ax.set_xlim(0, 1)
-            ax.set_ylim(0.8, 1.01)
+            ax.set_xlim([0, 1])
+            ax.set_ylim([0.8, 1.01])
             plt.grid(True)
             #plt.legend(bbox_to_anchor=(1.04, 1), loc="upper left")
-            plt.legend(loc="lower left")
+            ax.legend(loc="lower left")
         fig.savefig(Path(save_dir), dpi=100)
         result = None
         # Each resut represents a class
